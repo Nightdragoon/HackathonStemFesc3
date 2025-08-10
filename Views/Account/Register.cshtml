@@ -1,0 +1,67 @@
+@{
+    ViewData["Title"] = "Crear cuenta";
+}
+<!-- Registro simple con Bootstrap 5: correo, contraseña y confirmar contraseña -->
+<div class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="card shadow-sm w-100 mx-3" style="max-width: 420px;">
+    <div class="card-body p-4">
+      <h1 class="h4 fw-semibold mb-3 text-center">Crear cuenta</h1>
+
+      <form id="registerForm" novalidate>
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" placeholder="tu@correo.com" required />
+          <div class="invalid-feedback">Ingresa un correo válido.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" placeholder="••••••••" minlength="6" required />
+          <div class="form-text">Mínimo 6 caracteres.</div>
+          <div class="invalid-feedback">La contraseña es obligatoria.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirm" class="form-label">Confirmar contraseña</label>
+          <input type="password" class="form-control" id="confirm" placeholder="••••••••" minlength="6" required />
+          <div class="invalid-feedback" id="matchFeedback">Las contraseñas no coinciden.</div>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Registrarme</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- JS mínimo: validar y comprobar coincidencia -->
+<script>
+  (function () {
+    const form = document.getElementById('registerForm');
+    const pwd = document.getElementById('password');
+    const confirm = document.getElementById('confirm');
+
+    function checkMatch() {
+      if (confirm.value && pwd.value !== confirm.value) {
+        confirm.setCustomValidity('nomatch');
+      } else {
+        confirm.setCustomValidity('');
+      }
+    }
+
+    pwd.addEventListener('input', checkMatch);
+    confirm.addEventListener('input', checkMatch);
+
+    form.addEventListener('submit', function (e) {
+      checkMatch();
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  })();
+</script>
+
+
