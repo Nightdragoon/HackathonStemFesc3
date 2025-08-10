@@ -6,7 +6,7 @@ namespace HackathonStemFesc.Interfaces;
 public interface ILoginConexion
 {
     public bool SiExiste(string username, string password);
-    public Task<bool> Register(RegisterDto user);
+    public Task<CreatedDto> Register(RegisterDto user);
     public bool Login(string username, string password);
 }
 
@@ -17,12 +17,12 @@ public class LoginConexion : ILoginConexion
         throw new NotImplementedException();
     }
 
-    public async Task<bool> Register(RegisterDto user)
+    public async Task<CreatedDto> Register(RegisterDto user)
     {
         try
         {
             var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, "127.0.0.1:8000/register");
+            var request = new HttpRequestMessage(HttpMethod.Post, "127.0.0.1:8000/users/upsert");
             var contenido = JsonSerializer.Serialize(user);
             var content = new StringContent(contenido, null, "application/json");
 
@@ -30,16 +30,14 @@ public class LoginConexion : ILoginConexion
             var response = await client.SendAsync(request);
             if (response == null || response.IsSuccessStatusCode == false)
             {
-                return false;
+                return null;
             }
-            else
-            {
-                return true;
-            }
+            var restult = await JsonSerializer.DeserializeAsync<CreatedDto>(await response.Content.ReadAsStreamAsync());
+            return restult;
         }
         catch (Exception e)
         {
-            return false;
+            return null;
         }
         
     }

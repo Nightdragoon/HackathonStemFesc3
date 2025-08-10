@@ -10,11 +10,13 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IThirdPartyConexion _thirdPartyConexion;
+    private readonly ILoginConexion _loginConexion;
 
-    public HomeController(ILogger<HomeController> logger, IThirdPartyConexion thirdPartyConexion)
+    public HomeController(ILogger<HomeController> logger, IThirdPartyConexion thirdPartyConexion ,ILoginConexion loginConexion )
     {
         _thirdPartyConexion = thirdPartyConexion;
         _logger = logger;
+        _loginConexion = loginConexion;
     }
 
     public async Task<IActionResult> Index()
@@ -53,6 +55,12 @@ public class HomeController : Controller
     {
         var humenAi = await _thirdPartyConexion.GetHumenAi(message);
         return Json(humenAi.generations[0].audio);
+    }
+    [HttpPost]
+    public async Task<JsonResult> Register([FromBody] RegisterDto register)
+    {
+        var loging = await _loginConexion.Register(register);
+        return Json(loging.uuid);
     }
 
 public IActionResult Privacy()

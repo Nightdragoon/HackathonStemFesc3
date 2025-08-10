@@ -14,6 +14,8 @@ builder.Services.AddAuthorization();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IThirdPartyConexion, ThirdPartyConexion>();
+builder.Services.AddTransient<ILoginConexion,LoginConexion>();
+
 
 var app = builder.Build();
 
