@@ -94,3 +94,4 @@ C:\Users\Night\RiderProjects\HackathonStemFesc\HackathonStemFesc\obj\Debug\net9.
 C:\Users\Night\RiderProjects\HackathonStemFesc\HackathonStemFesc\obj\Debug\net9.0\HackathonStemFesc.pdb
 C:\Users\Night\RiderProjects\HackathonStemFesc\HackathonStemFesc\obj\Debug\net9.0\HackathonStemFesc.genruntimeconfig.cache
 C:\Users\Night\RiderProjects\HackathonStemFesc\HackathonStemFesc\obj\Debug\net9.0\ref\HackathonStemFesc.dll
+C:\Users\Night\RiderProjects\HackathonStemFesc\HackathonStemFesc\obj\Debug\net9.0\HackathonStemFesc.sourcelink.json
